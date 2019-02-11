@@ -32,4 +32,12 @@ array_push($accounts, $account);
 foreach ($accounts as $account) {
 	echo "<h1>{$account->getOwner()}s konto</h1>";
 	echo "<pre>Saldo: {$account->getCurrentBalance()} kr</pre>";
+	echo "<h2>Transaktioner</h2>";
+
+	$transactions = $account->getTransactions();
+	foreach ($transactions as $transaction) {
+		echo "<pre>{$transaction}</pre>";
+	}
+
+	echo "<hr>";
 }
