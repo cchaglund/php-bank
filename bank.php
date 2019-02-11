@@ -1,18 +1,20 @@
 <?php
 
-require("includes/Account.php");
+require_once("includes/Account.php");
+require_once("includes/Transaction.php");
 
 $accounts = [];
 
 $account = new Account("1337", "Johan", 4242);
-$account->deposit("2019-01-01", "CSN", 1000);
-$account->withdraw("2019-01-02", "Delicato-boll", 25);
-$account->withdraw("2019-01-04", "Hemköp", 149);
-$account->withdraw("2019-02-03", "Lunch", 65);
-$account->deposit("2019-02-11", "Swish", 250);
+$account->deposit(100, "2019-01-01", "CSN");
+$account->withdraw(995);
+$account->withdraw(25, "2019-01-02", "Delicato-boll");
+$account->withdraw(149, "2019-01-04", "Hemköp");
+$account->withdraw(65, "2019-02-03", "Lunch");
+$account->deposit(250, "2019-02-11", "Swish");
 array_push($accounts, $account);
 var_dump($account);
-die();
+// die();
 
 /*
 $account = new Account("123456789", "Peter");
@@ -40,7 +42,7 @@ foreach ($accounts as $account) {
 
 	$transactions = $account->getTransactions();
 	foreach ($transactions as $transaction) {
-		echo "<pre>Datum: {$transaction['date']}, Beskrivning: {$transaction['desc']}, Belopp: {$transaction['amount']}</pre>";
+		echo $transaction->getDetails();
 	}
 
 	echo "<hr>";

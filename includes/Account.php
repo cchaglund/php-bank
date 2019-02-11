@@ -1,5 +1,7 @@
 <?php
 
+require_once("includes/Transaction.php");
+
 class Account {
 
 	protected $accountNumber;
@@ -13,27 +15,19 @@ class Account {
 		$this->balance = $balance;
 	}
 
-	public function deposit($date, $desc, $amount) {
-		// $this->balance = $this->balance + $amount; // samma sak som nedan men mer verbose
+	public function deposit($amount, $date = false, $desc = "") {
 		$this->balance += $amount;
+
 		// skapa en transaktion för insättningen
-		$transaction = [
-			'date' => $date,
-			'desc' => $desc,
-			'amount' => $amount
-		];
+		$transaction = new Transaction($amount, $date, $desc);
 		array_push($this->transactions, $transaction);
 	}
 
-	public function withdraw($date, $desc, $amount) {
-		// $this->balance = $this->balance - $amount; // samma sak som nedan men mer verbose
+	public function withdraw($amount, $date = false, $desc = "") {
 		$this->balance -= $amount;
+
 		// skapa en transaktion för uttaget
-		$transaction = [
-			'date' => $date,
-			'desc' => $desc,
-			'amount' => -$amount
-		];
+		$transaction = new Transaction($amount, $date, $desc);
 		array_push($this->transactions, $transaction);
 	}
 
