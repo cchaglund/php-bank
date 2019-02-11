@@ -9,13 +9,13 @@ class Account {
 	protected $owner;
 	protected $transactions = [];
 
-	public function __construct($accountNumber, $owner, $balance = 0) {
+	public function __construct(String $accountNumber, String $owner, Float $balance = 0) {
 		$this->accountNumber = $accountNumber;
 		$this->owner = $owner;
 		$this->balance = $balance;
 	}
 
-	public function deposit($amount, $date = false, $desc = "") {
+	public function deposit(Float $amount, $date = false, $desc = "") {
 		$this->balance += $amount;
 
 		// skapa en transaktion för insättningen
@@ -23,7 +23,7 @@ class Account {
 		array_push($this->transactions, $transaction);
 	}
 
-	public function withdraw($amount, $date = false, $desc = "") {
+	public function withdraw(Float $amount, $date = false, $desc = "") {
 		$this->balance -= $amount;
 
 		// skapa en transaktion för uttaget
